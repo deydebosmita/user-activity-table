@@ -26,6 +26,7 @@ export default class ActivityCalendar extends React.Component{
             if(start_time.includes(date)){
                 this.setState({start:start_time,end:end_time,match:true})
             }
+            else this.setState({match:false})
         })
 
         this.setState({showModal:true});       
@@ -43,10 +44,10 @@ render(){
             </div>
         <Calendar className='calendar' onClickDay={(value)=>this.format(value)} />
         {showModal &&
-         <Modal show={showModal} onHide={()=>this.setState({showModal:false})}>
+         <Modal show={showModal} onHide={close}>
            <Modal.Header>User Activity</Modal.Header>
            <Modal.Body>{match? difference:'User has no activity for the selected date'}</Modal.Body> 
-           <Modal.Footer><Button onClick={()=>this.setState({showModal:false})}>Close</Button></Modal.Footer>
+           <Modal.Footer><Button onClick={close}>Close</Button></Modal.Footer>
          </Modal>}
         </div>
     )
